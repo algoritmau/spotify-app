@@ -1,0 +1,22 @@
+---
+root: true
+
+env:
+  browser: true
+  commonjs: true
+  es2021: true
+
+extends:
+  - airbnb-base
+
+parserOptions:
+  ecmaVersion: 13
+
+rules:
+  arrow-body-style:
+    - ['error', 'as-needed']
+    - requireReturnForObjectLiteral: true
+  comma-dangle: ['error', 'never']
+  newline-before-return: 'error'
+  no-console: 'off'
+  semi: ['error', 'never']

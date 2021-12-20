@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "server": "nodemon index.js",
+    "client": "cd client && npm run start",
+    "postinstall": "cd client && npm install",
+    "lint": "eslint --fix --ext .js,.jsx"
   },
   "repository": {
     "type": "git",
@@ -33,6 +37,7 @@
     "randomstring": "^1.2.1"
   },
   "devDependencies": {
+    "concurrently": "^6.5.1",
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",

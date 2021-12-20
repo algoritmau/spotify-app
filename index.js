@@ -4,7 +4,6 @@ const express = require('express')
 const queryString = require('query-string')
 const randomstring = require('randomstring')
 const axios = require('axios')
-const { response } = require('express')
 
 const app = express()
 const port = process.env.PORT || 7777
@@ -51,23 +50,17 @@ app.get('/callback', (req, res) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        const { access_token: accessToken, token_type: tokenType } =
-          response.data
+        const { access_token: accessToken, refresh_token: refreshToken } = response.data
+        const queryParams = queryString.stringify({
+          access_token: accessToken,
+          refresh_token: refreshToken
+        })
 
-        res.cookie('access_token', `${tokenType} ${accessToken}`)
-
-        axios
-          .get('https://api.spotify.com/v1/me', {
-            headers: {
-              Authorization: `${tokenType} ${accessToken}`
-            }
-          })
-          .then((apiResponse) =>
-            res.send(`<pre>${JSON.stringify(apiResponse.data, null, 2)}</pre>`)
-          )
-          .catch((error) => res.send(error))
+        // Redirect to client app and pass access token and refresh token as query params
+        res.redirect(`http://localhost:3000/?${queryParams}`)
       } else {
-        res.send(response)
+        //  res.redirect(`/?${queryString.stringify({ error: 'Something went wrong' })}`)
+        res.redirect(`http://localhost:3000/?error=${response.status}`)
       }
     })
     .catch((error) => res.send(error))
@@ -75,21 +68,23 @@ app.get('/callback', (req, res) => {
 
 app.get('/refresh_token', (req, res) => {
   const { refresh_token: refreshToken } = req.query
-
-  axios({
+  const authOptions = {
     method: 'POST',
     url: 'https://accounts.spotify.com/api/token',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: `Basic ${Buffer.from(
         `${CLIENT_ID}:${CLIENT_SECRET}`
-      ).toString('base64')}`
+      ).toString('base64')}`,
+      'Access-Control-Allow-Origin': '*'
     },
     data: queryString.stringify({
       grant_type: 'refresh_token',
       refresh_token: refreshToken
     })
-  })
+  }
+
+  axios(authOptions)
     .then((response) => res.send(response.data))
     .catch((error) => res.send(error))
 })

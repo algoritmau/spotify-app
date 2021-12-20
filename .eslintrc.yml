@@ -13,9 +13,6 @@ parserOptions:
   ecmaVersion: 13
 
 rules:
-  arrow-body-style:
-    - ['error', 'as-needed']
-    - requireReturnForObjectLiteral: true
   comma-dangle: ['error', 'never']
   newline-before-return: 'error'
   no-console: 'off'

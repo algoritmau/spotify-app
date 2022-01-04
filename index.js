@@ -50,17 +50,22 @@ app.get('/callback', (req, res) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        const { access_token: accessToken, refresh_token: refreshToken } = response.data
+        const {
+          access_token: accessToken,
+          refresh_token: refreshToken,
+          expires_in: expiresIn
+        } = response.data
         const queryParams = queryString.stringify({
           access_token: accessToken,
-          refresh_token: refreshToken
+          refresh_token: refreshToken,
+          expires_in: expiresIn
         })
 
-        // Redirect to client app and pass access token and refresh token as query params
+        // Redirect to client app and pass access token
+        // and refresh token as query params
         res.redirect(`http://localhost:3000/?${queryParams}`)
       } else {
-        //  res.redirect(`/?${queryString.stringify({ error: 'Something went wrong' })}`)
-        res.redirect(`http://localhost:3000/?error=${response.status}`)
+        res.redirect(`/?${queryString.stringify({ error: 'invalid_token' })}`)
       }
     })
     .catch((error) => res.send(error))

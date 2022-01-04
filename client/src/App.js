@@ -1,30 +1,27 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { accessToken, logout } from './spotify'
 import './App.css'
 
 function App() {
-  useEffect(() => {
-    const queryString = window.location.search
-    const urlParams = new URLSearchParams(queryString)
-    // const accessToken = urlParams.get('access_token')
-    const refreshToken = urlParams.get('refresh_token')
+  const [token, setToken] = useState(null)
 
-    if (refreshToken) {
-      fetch(`/refresh_token?refresh_token=${refreshToken}`)
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(`[💥 An error has occurred] ${error}`))
-    }
+  useEffect(() => {
+    setToken(accessToken)
   }, [])
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="http://localhost:7777/login">
-          Log in to Spotify
-        </a>
+        {token ? (
+          <div>
+            <h1>Logged in</h1>
+            <button onClick={logout}>Log Out</button>
+          </div>
+        ) : (
+          <a className="App-link" href="http://localhost:7777/login">
+            Log in to Spotify
+          </a>
+        )}
       </header>
     </div>
   )

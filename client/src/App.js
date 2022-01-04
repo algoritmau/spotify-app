@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { accessToken, getCurrentUserProfile, logout } from './spotify'
 import { catchErrors } from './utils'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
+import { NotFound, Playlist, Playlists, TopArtists, TopTracks } from './pages'
 
 function App() {
   const [token, setToken] = useState(null)
@@ -16,29 +18,41 @@ function App() {
     }
 
     catchErrors(fecthProfileData())
-  }, [])
+  }, [token, profile])
+
+  const Home = () => (
+    <div>
+      <button onClick={logout}>Log Out</button>
+      {profile && (
+        <section>
+          <img src={profile.images[0]?.url} alt={profile.display_name} />
+          <h2>{profile.display_name}</h2>
+          <p>{profile.followers.total} Followers</p>
+        </section>
+      )}
+    </div>
+  )
 
   return (
     <div className="App">
-      <header className="App-header">
+      <main className="App-header">
         {token ? (
-          <main>
-            <h1>Logged in</h1>
-            <button onClick={logout}>Log Out</button>
-            {profile && (
-              <section>
-                <img src={profile.images[0]?.url} alt={profile.display_name} />
-                <h2>{profile.display_name}</h2>
-                <p>{profile.followers.total} Followers</p>
-              </section>
-            )}
-          </main>
+          <Router>
+            <Routes>
+              <Route path="/top-artists" element={<TopArtists />} />
+              <Route path="/top-tracks" element={<TopTracks />} />
+              <Route path="/playlists/:id" element={<Playlist />} />
+              <Route path="/playlists" element={<Playlists />} />
+              <Route path="/" element={<Home />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
         ) : (
           <a className="App-link" href="http://localhost:7777/login">
             Log in to Spotify
           </a>
         )}
-      </header>
+      </main>
     </div>
   )
 }

@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
-import { accessToken, getCurrentUserProfile, logout } from './spotify'
-import { catchErrors } from './utils'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.css'
+
+import { accessToken, getCurrentUserProfile, logout } from './spotify'
+
 import { NotFound, Playlist, Playlists, TopArtists, TopTracks } from './pages'
+
+import { catchErrors } from './utils'
+
+import { StyledGlobalStyles, StyledLogInButton } from './components/styled'
 
 function App() {
   const [token, setToken] = useState(null)
@@ -34,26 +38,29 @@ function App() {
   )
 
   return (
-    <div className="App">
-      <main className="App-header">
-        {token ? (
-          <Router>
-            <Routes>
-              <Route path="/top-artists" element={<TopArtists />} />
-              <Route path="/top-tracks" element={<TopTracks />} />
-              <Route path="/playlists/:id" element={<Playlist />} />
-              <Route path="/playlists" element={<Playlists />} />
-              <Route path="/" element={<Home />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Router>
-        ) : (
-          <a className="App-link" href="http://localhost:7777/login">
-            Log in to Spotify
-          </a>
-        )}
-      </main>
-    </div>
+    <>
+      <StyledGlobalStyles />
+      <div>
+        <main className="App-header">
+          {token ? (
+            <Router>
+              <Routes>
+                <Route path="/top-artists" element={<TopArtists />} />
+                <Route path="/top-tracks" element={<TopTracks />} />
+                <Route path="/playlists/:id" element={<Playlist />} />
+                <Route path="/playlists" element={<Playlists />} />
+                <Route path="/" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Router>
+          ) : (
+            <StyledLogInButton href="http://localhost:7777/login">
+              Log in to Spotify
+            </StyledLogInButton>
+          )}
+        </main>
+      </div>
+    </>
   )
 }
 

@@ -4,12 +4,37 @@ import variables from './variables'
 const StyledGlobalStyles = createGlobalStyle`
   ${variables}
 
+  @font-face {
+    font-family: 'Faktum';
+    src: url('/assets/fonts/Faktum-Bold.woff2') format('woff2'),
+      url('/assets/fonts/Faktum-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Aktiv Grotesk';
+    src: url('/assets/fonts/AktivGrotesk-Bold.woff2') format('woff2'),
+      url('/assets/fonts/AktivGrotesk-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Aktiv Grotesk';
+    src: url('/assets/fonts/AktivGrotesk-Regular.woff2') format('woff2'),
+      url('/assets/fonts/AktivGrotesk-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+
   html {
     font-size: 62.5%;
     box-sizing: border-box;
   }
 
   body {
+    font-family: var(--font-body-copy);
     font-size: 1.6rem;
     background-color: var(--color-black);
     color: var(--color-white);
@@ -36,6 +61,12 @@ const StyledGlobalStyles = createGlobalStyle`
 
   li {
     list-style: none;
+  }
+
+  .truncated {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
 

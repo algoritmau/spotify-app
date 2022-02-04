@@ -34,7 +34,7 @@ const isTokenExpired = () => {
  * Clear out localStorage and reload the page
  * @returns {void}
  */
-export const logout = () => {
+export const logOut = () => {
   for (const property in LOCALSTORAGE_KEYS) {
     window.localStorage.removeItem(LOCALSTORAGE_KEYS[property])
   }
@@ -56,7 +56,9 @@ const refreshToken = async () => {
       Date.now() - Number(LOCALSTORAGE_VALUES.timestamp) / 1000 < 1000
     ) {
       console.error('Refresh token not found')
-      logout()
+
+      logOut()
+
       return
     }
 
@@ -141,6 +143,38 @@ axios.defaults.headers['Content-Type'] = 'application/json'
 /**
  * Get current user's profile
  * https://developer.spotify.com/documentation/web-api/reference/users-profile/get-current-users-profile/
- * @returns {Promise} A user's profile
+ * @returns {Promise} A promise that resolves to the user's profile
  */
 export const getCurrentUserProfile = () => axios.get('/me')
+
+/**
+ * Get current user's playlists
+ * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists
+ * @returns {Promise} A promise that resolves to the user's playlists
+ */
+export const getCurrentUserPlaylists = (limit = 24) =>
+  axios.get(`/me/playlists?limit=${limit}`)
+
+/**
+ * Get current user's top artists
+ * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-top-artists-and-tracks
+ * @param {string} type - The type to retrieve ('artists' or 'tracks')
+ * @param {string} time_range - Over what time frame the data is calculated:
+ *  short_term: Last 4 weeks, medium_term: Last 6 months, long_term: All time
+ * Defaults to medium_term
+ * @returns {Promise} A promise that resolves to the user's top artists
+ */
+export const getCurrentUserTopArtists = (time_range = 'short_term') =>
+  axios.get(`/me/top/artists?time_range=${time_range}`)
+
+/**
+ * Get current user's top tracks
+ * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-top-artists-and-tracks
+ * @param {string} type - The type to retrieve ('artists' or 'tracks')
+ * @param {string} time_range - Over what time frame the data is calculated:
+ *  short_term: Last 4 weeks, medium_term: Last 6 months, long_term: All time
+ * Defaults to medium_term
+ * @returns {Promise} A promise that resolves to the user's top tracks
+ */
+export const getCurrentUserTopTracks = (time_range = 'short_term') =>
+  axios.get(`/me/top/tracks?time_range=${time_range}`)

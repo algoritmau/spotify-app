@@ -1,4 +1,6 @@
 export * from './404'
+export { default as Login } from './Login'
+export { default as Profile } from './Profile'
 export * from './playlist'
 export * from './playlists'
 export * from './top-artists'

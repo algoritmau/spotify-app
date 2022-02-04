@@ -14,7 +14,7 @@ app.get('/', (_, res) => res.send('Hello, world!'))
 
 app.get('/login', (_, res) => {
   const AUTHORIZATION_ENDPOINT = 'https://accounts.spotify.com/authorize'
-  const scope = 'user-read-private user-read-email'
+  const scope = ['user-read-private user-read-email user-top-read'].join(' ')
   const state = randomstring.generate(16)
   const stateKey = 'spotify_auth_state'
   const queryParams = queryString.stringify({

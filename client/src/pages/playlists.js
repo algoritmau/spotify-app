@@ -19,7 +19,7 @@ export const Playlists = () => {
   }, [])
 
   return (
-    <Section title="Top playlists" breadcrumb={true}>
+    <Section title="Top playlists" breadcrumb={true} isAltSection={true}>
       {playlists && playlists.items && (
         <PlaylistsGrid playlists={playlists.items} />
       )}

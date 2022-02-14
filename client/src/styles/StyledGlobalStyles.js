@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components/macro'
 import variables from './variables'
 
-const StyledGlobalStyles = createGlobalStyle`
+export const StyledGlobalStyles = createGlobalStyle`
   ${variables}
 
   @font-face {
@@ -68,6 +68,29 @@ const StyledGlobalStyles = createGlobalStyle`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-`
 
-export default StyledGlobalStyles
+  .app-wrapper {
+    position: relative;
+
+    & > button {
+      position: absolute;
+      top: 2.4rem;
+      right: 2.4rem;
+      background-color: var(--color-black-light);
+      transition: background-color 0.4s ease;
+
+      &:focus,
+      &:hover {
+        background-color: var(--color-green);
+      }
+
+      @media screen and (min-width: 960px) {
+        right: 16vw;
+      }
+
+      @media screen and (min-width: 1440px) {
+        right: 20vw;
+      }
+    }
+  }
+`

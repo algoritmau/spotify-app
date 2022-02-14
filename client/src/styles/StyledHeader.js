@@ -11,10 +11,10 @@ export const StyledHeader = styled.header`
     display: flex;
     align-items: flex-end;
     gap: 1.6rem;
-    padding: 5.6rem 1.6rem 1.6rem 1.6rem;
+    padding: 9.6rem 1.6rem 1.6rem 1.6rem;
 
     @media screen and (min-width: 390px) {
-      padding: 6.4rem 2.4rem 1.6rem 2.4rem;
+      padding: 8.8rem 2.4rem 1.6rem 2.4rem;
     }
 
     @media screen and (min-width: 414px) {

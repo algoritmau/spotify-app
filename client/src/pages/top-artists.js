@@ -31,6 +31,7 @@ export const TopArtists = () => {
           timeRangeButtons={true}
           timeRangeButtonOnClickFn={setActiveRange}
           activeRange={activeRange}
+          isAltSection={true}
         >
           <Grid artists={topArtists.items} />
         </Section>

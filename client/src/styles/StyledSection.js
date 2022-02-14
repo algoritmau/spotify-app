@@ -2,15 +2,23 @@ import styled from 'styled-components/macro'
 
 export const StyledSection = styled.section`
   .section {
-    &__content {
+    &__content,
+    &__content--alt {
       width: 100%;
       max-width: var(--max-width);
       margin: 0 auto;
       position: relative;
-      padding: 6.4rem 2.4rem;
+    }
+
+    &__content {
+      padding: 4rem 2.4rem 6.4rem 2.4rem;
 
       @media screen and (min-width: 768px) {
-        padding: 8rem 2.4rem;
+        padding: 6.4rem 2.4rem;
+      }
+
+      &--alt {
+        padding: 12rem 2.4rem 6.4rem 2.4rem;
       }
     }
 
@@ -48,7 +56,7 @@ export const StyledSection = styled.section`
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-block-end: 4rem;
+      margin-block-end: 2.4rem;
 
       &--alt {
         display: flex;

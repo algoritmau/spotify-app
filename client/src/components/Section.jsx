@@ -9,10 +9,15 @@ export const Section = ({
   timeRangeButtons,
   timeRangeButtonOnClickFn,
   activeRange,
+  isAltSection,
   children
 }) => (
   <StyledSection>
-    <div className="section__content">
+    <div
+      className={`${
+        isAltSection ? 'section__content--alt' : 'section__content'
+      }`}
+    >
       <div
         className={`${
           timeRangeButtons ? 'section__header--alt' : 'section__header'

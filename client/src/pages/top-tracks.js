@@ -31,6 +31,7 @@ export const TopTracks = () => {
           timeRangeButtons={true}
           timeRangeButtonOnClickFn={setActiveRange}
           activeRange={activeRange}
+          isAltSection={true}
         >
           <TracksList tracks={topTracks.items} />
         </Section>

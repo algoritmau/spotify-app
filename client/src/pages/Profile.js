@@ -4,13 +4,12 @@ import {
   getCurrentUserPlaylists,
   getCurrentUserProfile,
   getCurrentUserTopArtists,
-  getCurrentUserTopTracks,
-  logOut
+  getCurrentUserTopTracks
 } from '../spotify'
 
 import { catchErrors } from '../utils'
 
-import { Button, Grid, PlaylistsGrid, Section, TracksList } from '../components'
+import { Grid, PlaylistsGrid, Section, TracksList } from '../components'
 
 import { StyledHeader } from '../styles'
 
@@ -60,7 +59,6 @@ const Profile = () => {
                 <span>{topArtists.total} Top Artists</span>
               </p>
             </div>
-            <Button onClickFn={logOut} text="Log Out" />
           </div>
         </StyledHeader>
       )}

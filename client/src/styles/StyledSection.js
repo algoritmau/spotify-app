@@ -49,6 +49,19 @@ export const StyledSection = styled.section`
       justify-content: space-between;
       align-items: baseline;
       margin-block-end: 4rem;
+
+      &--alt {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 9.6rem;
+        margin-block-end: 2.4rem;
+
+        @media screen and (min-width: 768px) {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
     }
 
     &__breadcrumb {
@@ -58,7 +71,7 @@ export const StyledSection = styled.section`
       &::after {
         content: '/';
         display: block;
-        margin: 0 0.4rem;
+        margin: 0 0.8rem;
       }
 
       a {
@@ -90,6 +103,42 @@ export const StyledSection = styled.section`
         text-decoration: underline;
         text-underline-offset: 0.2rem;
         opacity: 0.9;
+      }
+    }
+
+    &__dateRangeTabs {
+      display: flex;
+      gap: 0.8rem;
+      overflow-x: auto;
+    }
+
+    &__dateRangeTab {
+      min-width: 12.8rem;
+
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      padding: 1.6rem 0.8rem;
+      background-color: var(--color-black-light);
+      color: var(--color-white);
+      font-family: var(--font-body-copy);
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-radius: var(--border-radius-pill);
+
+      transition: filter 0.2s ease-in-out;
+
+      @media screen and (min-width: 768px) {
+        font-size: 1.6rem;
+      }
+
+      &--active {
+        background-color: var(--color-green);
+      }
+
+      &:hover,
+      &:focus {
+        filter: brightness(1.1);
       }
     }
   }

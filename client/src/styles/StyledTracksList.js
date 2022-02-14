@@ -13,11 +13,16 @@ export const StyledTracksList = styled.ul`
       gap: 16px;
       color: var(--color-white);
       font-size: 1.6rem;
+      transition: transform 0.2s ease;
 
       &:not(:last-child) {
         border-bottom: 1px solid #fefefe16;
         padding-block-end: 16px;
         margin-block-end: 16px;
+      }
+
+      &:hover {
+        transform: translateX(16px);
       }
 
       @media (min-width: 768px) {

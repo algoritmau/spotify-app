@@ -7,6 +7,7 @@ import {
   getCurrentUserTopTracks,
   logOut
 } from '../spotify'
+
 import { catchErrors } from '../utils'
 
 import { Button, Grid, PlaylistsGrid, Section, TracksList } from '../components'
@@ -30,10 +31,6 @@ const Profile = () => {
       setPlaylists(playlistsData)
       setTopArtists(topArtistsData)
       setTopTracks(topTracksData)
-      console.log(profileData)
-      console.log(playlistsData)
-      console.log(topArtistsData)
-      console.log(topTracksData)
     }
 
     catchErrors(fetchProfileData())

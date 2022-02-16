@@ -8,7 +8,9 @@
     "server": "nodemon index.js",
     "client": "cd client && npm run start",
     "postinstall": "cd client && npm install",
-    "lint": "eslint --fix --ext .js,.jsx"
+    "lint": "eslint --fix --ext .js,.jsx",
+    "build": "NODE_ENV=production cd client/ && npm install && npm run build",
+    "start-server": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -42,5 +44,12 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
     "nodemon": "^2.0.15"
-  }
+  },
+  "engines": {
+    "node": "16.9.1"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ]
 }

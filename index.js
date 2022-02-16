@@ -1,16 +1,27 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 require('dotenv').config()
 
 const express = require('express')
 const queryString = require('query-string')
 const randomstring = require('randomstring')
 const axios = require('axios')
+const path = require('path')
 
 const app = express()
-const port = process.env.PORT || 7777
 
-const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = process.env
+const {
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URI,
+  FRONTEND_URI
+} = process.env
+const PORT = process.env.PORT || 7777
 
 app.get('/', (_, res) => res.send('Hello, world!'))
+
+// Priority serve any static files
+app.use(express.static(path.resolve(__dirname, './client/build')))
 
 app.get('/login', (_, res) => {
   const AUTHORIZATION_ENDPOINT = 'https://accounts.spotify.com/authorize'
@@ -63,7 +74,7 @@ app.get('/callback', (req, res) => {
 
         // Redirect to client app and pass access token
         // and refresh token as query params
-        res.redirect(`http://localhost:3000/?${queryParams}`)
+        res.redirect(`${FRONTEND_URI}?${queryParams}`)
       } else {
         res.redirect(`/?${queryString.stringify({ error: 'invalid_token' })}`)
       }
@@ -94,6 +105,11 @@ app.get('/refresh_token', (req, res) => {
     .catch((error) => res.send(error))
 })
 
-app.listen(port, () => {
-  console.log(`🚀 App listening on http://localhost:${port}`)
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', (_, res) =>
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+)
+
+app.listen(PORT, () => {
+  console.log(`🚀 App listening on http://localhost:${PORT}`)
 })

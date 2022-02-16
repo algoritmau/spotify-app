@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro'
 
+// TODO: Move styles to its own file
+
 const StyledLoginContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -40,14 +42,17 @@ const StyledLoginDescription = styled.h1`
   margin-block-end: 4.8rem;
 `
 
+const LOGIN_URI =
+  process.env.NODE_ENV !== 'production'
+    ? 'http://localhost:7777/login'
+    : 'https://mispotify.herokuapp.com/login'
+
 export const Login = () => (
   <StyledLoginContainer>
     <StyledLoginHeading>Log In</StyledLoginHeading>
     <StyledLoginDescription>
       Log in to your Spotify account to get started
     </StyledLoginDescription>
-    <StyledLoginButton href="http://localhost:7777/login">
-      Log in to Spotify
-    </StyledLoginButton>
+    <StyledLoginButton href={LOGIN_URI}>Log in to Spotify</StyledLoginButton>
   </StyledLoginContainer>
 )

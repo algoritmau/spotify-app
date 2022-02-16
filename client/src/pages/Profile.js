@@ -37,8 +37,7 @@ export const Profile = () => {
 
   return (
     <>
-      {/* <p>Vamos a ver</p> */}
-      {profile && (
+      {profile && playlists && topArtists && (
         <StyledHeader>
           <div className="header__content">
             {profile.images.length && profile.images[0].url && (

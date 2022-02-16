@@ -8,8 +8,6 @@ const randomstring = require('randomstring')
 const axios = require('axios')
 const path = require('path')
 
-const app = express()
-
 const {
   CLIENT_ID,
   CLIENT_SECRET,
@@ -18,7 +16,7 @@ const {
 } = process.env
 const PORT = process.env.PORT || 7777
 
-app.get('/', (_, res) => res.send('Hello, world!'))
+const app = express()
 
 // Priority serve any static files
 app.use(express.static(path.resolve(__dirname, './client/build')))

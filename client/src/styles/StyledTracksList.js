@@ -86,7 +86,7 @@ export const StyledTracksList = styled.ul`
         }
 
         @media screen and (min-width: 768px) {
-          margin-block-end: 1.2rem;
+          margin-block-end: 1rem;
           font-size: 2rem;
         }
       }

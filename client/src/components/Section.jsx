@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { StyledSection } from '../styles'
+import { StyledDropdown, StyledSection } from '../styles'
 
 export const Section = ({
   title,
@@ -9,6 +9,10 @@ export const Section = ({
   timeRangeButtons,
   timeRangeButtonOnClickFn,
   activeRange,
+  dropdown,
+  dropdownOnChangeFn,
+  dropdownOptions,
+  isDropdownActive,
   isAltSection,
   children
 }) => (
@@ -77,6 +81,25 @@ export const Section = ({
           <Link to={seeAllLink} className="section__link--seeAll">
             See All
           </Link>
+        )}
+        {dropdown && (
+          <StyledDropdown active={isDropdownActive}>
+            <label htmlFor="order-select" className="sr-only">
+              Sort tracks
+            </label>
+            <select
+              id="order-select"
+              name="track-order"
+              onChange={(e) => dropdownOnChangeFn(e.target.value)}
+            >
+              <option value="">Sort tracks</option>
+              {dropdownOptions.map((option, index) => (
+                <option value={option} key={index}>
+                  {`${option.charAt(0).toUpperCase()}${option.slice(1)}`}
+                </option>
+              ))}
+            </select>
+          </StyledDropdown>
         )}
       </div>
 

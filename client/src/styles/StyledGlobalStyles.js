@@ -93,4 +93,8 @@ export const StyledGlobalStyles = createGlobalStyle`
       }
     }
   }
+
+  .sr-only {
+    display: none;
+  }
 `

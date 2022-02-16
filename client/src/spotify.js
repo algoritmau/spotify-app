@@ -178,3 +178,21 @@ export const getCurrentUserTopArtists = (time_range = 'short_term') =>
  */
 export const getCurrentUserTopTracks = (time_range = 'short_term') =>
   axios.get(`/me/top/tracks?time_range=${time_range}`)
+
+/**
+ * Get a playlist by ID
+ * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlist
+ * @param {string} playlist_id - The ID of the playlist
+ * @returns {Promise} A promise that resolves to the playlist
+ */
+export const getPlaylistById = (playlist_id) =>
+  axios.get(`/playlists/${playlist_id}`)
+
+/**
+ * Get audio features for several tracks
+ * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-several-audio-features
+ * @param {string} ids - A comma-separated list of the Spotify IDs for the tracks
+ * @returns {Promise} A promise that resolves to the audio features
+ */
+export const getTracksAudioFeatures = (ids) =>
+  axios.get(`/audio-features?ids=${ids}`)

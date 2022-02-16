@@ -1,4 +1,5 @@
 export { StyledButton } from './StyledButton'
+export { StyledDropdown } from './StyledDropdown'
 export { StyledGlobalStyles } from './StyledGlobalStyles'
 export { StyledGrid } from './StyledGrid'
 export { StyledHeader } from './StyledHeader'

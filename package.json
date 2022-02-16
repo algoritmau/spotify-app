@@ -9,7 +9,7 @@
     "client": "cd client && npm run start",
     "postinstall": "cd client && npm install",
     "lint": "eslint --fix --ext .js,.jsx",
-    "build": "NODE_ENV=production cd client/ && npm install && npm run build",
+    "build": "NODE_ENV=production cd client && npm install && npm run build",
     "start-server": "node index.js"
   },
   "repository": {

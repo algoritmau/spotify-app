@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { getCurrentUserPlaylists } from '../spotify'
 import { catchErrors } from '../utils'
 
-import { PlaylistsGrid, Section } from '../components'
+import { Loader, PlaylistsGrid, Section } from '../components'
 
 export const Playlists = () => {
   const [playlists, setPlaylists] = useState(null)
@@ -20,8 +20,10 @@ export const Playlists = () => {
 
   return (
     <Section title="Top playlists" breadcrumb={true} isAltSection={true}>
-      {playlists && playlists.items && (
+      {playlists && playlists.items ? (
         <PlaylistsGrid playlists={playlists.items} />
+      ) : (
+        <Loader />
       )}
     </Section>
   )

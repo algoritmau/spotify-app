@@ -6,7 +6,7 @@ import { getPlaylistById, getTracksAudioFeatures } from '../spotify'
 import axios from 'axios'
 import { catchErrors } from '../utils'
 
-import { Section, TracksList } from '../components'
+import { Loader, Section, TracksList } from '../components'
 
 import { StyledHeader } from '../styles'
 
@@ -104,7 +104,7 @@ export const Playlist = () => {
 
   return (
     <>
-      {playlist && (
+      {playlist ? (
         <>
           <StyledHeader>
             <div className="header__content">
@@ -145,6 +145,8 @@ export const Playlist = () => {
             {tracks && <TracksList tracks={sortedTracks} />}
           </Section>
         </>
+      ) : (
+        <Loader />
       )}
     </>
   )

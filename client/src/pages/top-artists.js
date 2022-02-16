@@ -4,7 +4,7 @@ import { getCurrentUserTopArtists } from '../spotify'
 
 import { catchErrors } from '../utils'
 
-import { Grid, Section } from '../components'
+import { Grid, Loader, Section } from '../components'
 
 export const TopArtists = () => {
   const [topArtists, setTopArtists] = useState(null)
@@ -24,7 +24,7 @@ export const TopArtists = () => {
 
   return (
     <>
-      {topArtists && (
+      {topArtists ? (
         <Section
           title="Top artists"
           breadcrumb={true}
@@ -35,6 +35,8 @@ export const TopArtists = () => {
         >
           <Grid artists={topArtists.items} />
         </Section>
+      ) : (
+        <Loader />
       )}
     </>
   )

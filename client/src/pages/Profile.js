@@ -9,7 +9,7 @@ import {
 
 import { catchErrors } from '../utils'
 
-import { Grid, PlaylistsGrid, Section, TracksList } from '../components'
+import { Grid, Loader, PlaylistsGrid, Section, TracksList } from '../components'
 
 import { StyledHeader } from '../styles'
 
@@ -37,7 +37,7 @@ export const Profile = () => {
 
   return (
     <>
-      {profile && playlists && topArtists && (
+      {profile && playlists && topArtists ? (
         <StyledHeader>
           <div className="header__content">
             {profile.images.length && profile.images[0].url && (
@@ -60,6 +60,8 @@ export const Profile = () => {
             </div>
           </div>
         </StyledHeader>
+      ) : (
+        <Loader />
       )}
       <main>
         {topArtists && (

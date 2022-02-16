@@ -4,7 +4,7 @@ import { getCurrentUserTopTracks } from '../spotify'
 
 import { catchErrors } from '../utils'
 
-import { Section, TracksList } from '../components'
+import { Loader, Section, TracksList } from '../components'
 
 export const TopTracks = () => {
   const [topTracks, setTopTracks] = useState(null)
@@ -24,7 +24,7 @@ export const TopTracks = () => {
 
   return (
     <>
-      {topTracks && (
+      {topTracks ? (
         <Section
           title="Top tracks"
           breadcrumb={true}
@@ -35,6 +35,8 @@ export const TopTracks = () => {
         >
           <TracksList tracks={topTracks.items} />
         </Section>
+      ) : (
+        <Loader />
       )}
     </>
   )

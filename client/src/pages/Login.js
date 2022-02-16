@@ -40,7 +40,7 @@ const StyledLoginDescription = styled.h1`
   margin-block-end: 4.8rem;
 `
 
-const Login = () => (
+export const Login = () => (
   <StyledLoginContainer>
     <StyledLoginHeading>Log In</StyledLoginHeading>
     <StyledLoginDescription>
@@ -51,5 +51,3 @@ const Login = () => (
     </StyledLoginButton>
   </StyledLoginContainer>
 )
-
-export default Login

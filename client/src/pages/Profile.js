@@ -13,7 +13,7 @@ import { Grid, PlaylistsGrid, Section, TracksList } from '../components'
 
 import { StyledHeader } from '../styles'
 
-const Profile = () => {
+export const Profile = () => {
   const [profile, setProfile] = useState(null)
   const [playlists, setPlaylists] = useState(null)
   const [topArtists, setTopArtists] = useState(null)
@@ -82,5 +82,3 @@ const Profile = () => {
     </>
   )
 }
-
-export default Profile
